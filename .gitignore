@@ -2,3 +2,10 @@
 /MRX.Master.Api/obj
 /MRX.Master.Api/MRX.Master.Api.csproj.user
 /.vs
+/api/src/MRX.Master.Api/bin/Debug/net5.0
+/api/src/MRX.Master.Api/obj
+*.user
+/api/src/MRX.Master.Data/bin/Debug/netcoreapp3.1
+/api/src/MRX.Master.Data/obj
+/api/src/MRX.Master.Domain/bin/Debug/netcoreapp3.1
+/api/src/MRX.Master.Domain/obj
