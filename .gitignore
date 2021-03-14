@@ -9,3 +9,4 @@
 /api/src/MRX.Master.Data/obj
 /api/src/MRX.Master.Domain/bin/Debug/netcoreapp3.1
 /api/src/MRX.Master.Domain/obj
+/api/tests/MRX.Master.Api.Tests/obj
