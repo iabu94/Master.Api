@@ -9,11 +9,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{52E43B2F-406
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{88A7F4E4-DDAB-4A14-9222-D82C7AB41910}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRX.Master.Api", "api\src\MRX.Master.Api\MRX.Master.Api.csproj", "{AAD090BD-4C22-43E7-A144-8913AF4FFA45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRX.Master.Api", "api\src\MRX.Master.Api\MRX.Master.Api.csproj", "{AAD090BD-4C22-43E7-A144-8913AF4FFA45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRX.Master.Domain", "api\src\MRX.Master.Domain\MRX.Master.Domain.csproj", "{10CB471C-3F99-46D3-A385-62C00FB62848}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRX.Master.Domain", "api\src\MRX.Master.Domain\MRX.Master.Domain.csproj", "{10CB471C-3F99-46D3-A385-62C00FB62848}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRX.Master.Data", "api\src\MRX.Master.Data\MRX.Master.Data.csproj", "{70A603DD-51B6-4782-8520-3838004ACB0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MRX.Master.Data", "api\src\MRX.Master.Data\MRX.Master.Data.csproj", "{70A603DD-51B6-4782-8520-3838004ACB0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MRX.Master.Api.Tests", "api\tests\MRX.Master.Api.Tests\MRX.Master.Api.Tests.csproj", "{BAF0BADA-E505-4100-9FEF-35E3AF2323A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{70A603DD-51B6-4782-8520-3838004ACB0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70A603DD-51B6-4782-8520-3838004ACB0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70A603DD-51B6-4782-8520-3838004ACB0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAF0BADA-E505-4100-9FEF-35E3AF2323A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAF0BADA-E505-4100-9FEF-35E3AF2323A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAF0BADA-E505-4100-9FEF-35E3AF2323A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAF0BADA-E505-4100-9FEF-35E3AF2323A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -43,6 +49,7 @@ Global
 		{AAD090BD-4C22-43E7-A144-8913AF4FFA45} = {52E43B2F-406E-4577-B6ED-A789E5A12BC7}
 		{10CB471C-3F99-46D3-A385-62C00FB62848} = {52E43B2F-406E-4577-B6ED-A789E5A12BC7}
 		{70A603DD-51B6-4782-8520-3838004ACB0E} = {52E43B2F-406E-4577-B6ED-A789E5A12BC7}
+		{BAF0BADA-E505-4100-9FEF-35E3AF2323A3} = {88A7F4E4-DDAB-4A14-9222-D82C7AB41910}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1FD74DE5-6292-47CC-994B-EE8AE6F62B1F}
