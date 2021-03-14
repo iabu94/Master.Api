@@ -8,6 +8,6 @@ namespace MRX.Master.Domain.Models
         public string Code { get; set; }
         public string Description { get; set; }
 
-        public virtual IList<Paper> Papers { get; set; }
+        public virtual IList<GradeSubject> GradeSubjects { get; set; }
     }
 }
