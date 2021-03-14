@@ -6,6 +6,6 @@ namespace MRX.Master.Domain.Models
     {
         public string Type { get; set; }
 
-        public IList<Section> Sections { get; set; }
+        public virtual IList<Section> Sections { get; set; }
     }
 }

@@ -10,6 +10,6 @@ namespace MRX.Master.Domain.Models
 
         public virtual Paper Paper { get; set; }
         public virtual SectionType SectionType { get; set; }
-        public IList<QuestionInfo> Questions { get; set; }
+        public virtual IList<QuestionInfo> Questions { get; set; }
     }
 }

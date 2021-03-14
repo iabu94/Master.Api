@@ -5,7 +5,7 @@
         public long UserId { get; set; }
         public long ChoiceId { get; set; }
 
-        public User User { get; set; }
-        public ChoiceInfo Choice { get; set; }
+        public virtual User User { get; set; }
+        public virtual ChoiceInfo Choice { get; set; }
     }
 }

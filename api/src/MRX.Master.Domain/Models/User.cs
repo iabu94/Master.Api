@@ -11,6 +11,6 @@ namespace MRX.Master.Domain.Models
         public string MobileNumber { get; set; }
         public string NIC { get; set; }
 
-        public IList<UserChoice> UserChoices { get; set; }
+        public virtual IList<UserChoice> UserChoices { get; set; }
     }
 }
