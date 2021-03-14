@@ -1,7 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 
-namespace MRX.Master.Api.Extensions
+namespace MRX.Master.Infrastructure.Extensions
 {
     public static class ConfigurationExtension
     {

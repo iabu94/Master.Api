@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MRX.Master.Data\MRX.Master.Data.csproj" />
+    <ProjectReference Include="..\MRX.Master.Infrastructure\MRX.Master.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
