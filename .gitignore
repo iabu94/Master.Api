@@ -12,3 +12,5 @@
 /api/tests/MRX.Master.Api.Tests/obj
 /api/tests/MRX.Master.Api.Tests/bin/Debug/netcoreapp3.1
 /api/tests/MRX.Master.Api.Tests/bin/Debug/net5.0
+/api/src/MRX.Master.Infrastructure/obj
+/api/src/MRX.Master.Infrastructure/bin/Debug/netcoreapp3.1

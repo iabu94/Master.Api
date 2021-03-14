@@ -5,11 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.4" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\MRX.Master.Data\MRX.Master.Data.csproj" />
     <ProjectReference Include="..\MRX.Master.Domain\MRX.Master.Domain.csproj" />
   </ItemGroup>
 
