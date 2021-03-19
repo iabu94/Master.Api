@@ -5,5 +5,8 @@ namespace MRX.Master.Data.Repositories
 {
     public class UserRepository : DefaultRepository<User, long>, IUserRepository
     {
+        public UserRepository(MasterContext context) : base(context)
+        {
+        }
     }
 }
