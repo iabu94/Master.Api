@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace MRX.Master.Api.Controllers
 {
-    [Route("api/grades")]
-    public class GradeController : MasterControllerBase
+    [Route("api/papers")]
+    public class PaperController : MasterControllerBase
     {
-        private readonly IGradeRepository _repository;
+        private readonly IPaperRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public GradeController(IUnitOfWork unitOfWork, IGradeRepository repository, 
+        public PaperController(IUnitOfWork unitOfWork, IPaperRepository repository, 
             IMapper mapper)
         {
             _unitOfWork = unitOfWork;
@@ -26,38 +26,38 @@ namespace MRX.Master.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var grades = await _repository.GetAllAsync();
-            return Ok(_mapper.Map<IList<GradeDto>>(grades));
+            var papers = await _repository.GetAllAsync();
+            return Ok(_mapper.Map<IList<PaperDto>>(papers));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody, Required] GradeDto dto)
+        public async Task<IActionResult> Post([FromBody, Required] PaperDto dto)
         {
-            var grade = _mapper.Map<Grade>(dto);
-            await _repository.AddAsync(grade);
+            var paper = _mapper.Map<Paper>(dto);
+            await _repository.AddAsync(paper);
             await _unitOfWork.SaveChangesAsync();
-            return Ok(_mapper.Map<GradeDto>(grade));
+            return Ok(_mapper.Map<PaperDto>(paper));
         }
 
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] GradeDto dto)
+        public async Task<IActionResult> Put(int id, [FromBody] PaperDto dto)
         {
-            var grade = await _repository.GetAsync(id);
-            if (grade == null) return NotFound();
-            _mapper.Map(dto, grade);
-            _repository.Update(grade);
+            var paper = await _repository.GetAsync(id);
+            if (paper == null) return NotFound();
+            _mapper.Map(dto, paper);
+            _repository.Update(paper);
             await _unitOfWork.SaveChangesAsync();
-            return Ok(_mapper.Map<GradeDto>(grade));
+            return Ok(_mapper.Map<PaperDto>(paper));
         }
 
         [HttpDelete]
         [Route("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var grade = await _repository.GetAsync(id);
-            if (grade == null) return NotFound();
-            _repository.Delete(grade);
+            var paper = await _repository.GetAsync(id);
+            if (paper == null) return NotFound();
+            _repository.Delete(paper);
             await _unitOfWork.SaveChangesAsync();
             return Ok();
         }
