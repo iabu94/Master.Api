@@ -10,6 +10,12 @@ namespace MRX.Master.Data.Repositories
     public abstract class DefaultRepository<T, K> : IRepository<T> where T : BaseEntity<K> where K : struct
     {
         protected MasterContext Context { get; }
+
+        public DefaultRepository(MasterContext context)
+        {
+            Context = context;
+        }
+
         public async Task AddAsync(T entity)
         {
             await Context.Set<T>().AddAsync(entity);

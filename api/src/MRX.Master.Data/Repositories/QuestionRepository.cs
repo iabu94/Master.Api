@@ -5,5 +5,8 @@ namespace MRX.Master.Data.Repositories
 {
     public class QuestionRepository : DefaultRepository<QuestionInfo, long>, IQuestionRepository
     {
+        public QuestionRepository(MasterContext context) : base(context)
+        {
+        }
     }
 }

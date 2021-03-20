@@ -5,5 +5,8 @@ namespace MRX.Master.Data.Repositories
 {
     public class PaperRepository : DefaultRepository<Paper, int>, IPaperRepository
     {
+        public PaperRepository(MasterContext context) : base(context)
+        {
+        }
     }
 }

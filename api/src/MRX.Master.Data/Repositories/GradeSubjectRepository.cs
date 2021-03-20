@@ -5,5 +5,8 @@ namespace MRX.Master.Data.Repositories
 {
     public class GradeSubjectRepository : DefaultRepository<GradeSubject, int>, IGradeSubjectRepository
     {
+        public GradeSubjectRepository(MasterContext context) : base(context)
+        {
+        }
     }
 }
