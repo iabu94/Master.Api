@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="MasterContext.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="MasterContextTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="MasterContext" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="MasterContextContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="QuestionInfoes" EntityType="MasterContext.QuestionInfo" />
+          <EntitySet Name="ChoiceInfoes" EntityType="MasterContext.ChoiceInfo" />
+          <AssociationSet Name="QuestionChoice" Association="MasterContext.QuestionChoice">
+            <End Role="Question" EntitySet="QuestionInfoes" />
+            <End Role="Choice" EntitySet="ChoiceInfoes" />
+          </AssociationSet>
+          <EntitySet Name="Users" EntityType="MasterContext.User" />
+          <EntitySet Name="UserChoices1" EntityType="MasterContext.UserChoice" />
+          <AssociationSet Name="UserUserChoices" Association="MasterContext.UserUserChoices">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserChoices" EntitySet="UserChoices1" />
+          </AssociationSet>
+          <AssociationSet Name="ChoiceUserChoices" Association="MasterContext.ChoiceUserChoices">
+            <End Role="Choice" EntitySet="ChoiceInfoes" />
+            <End Role="UserChoices" EntitySet="UserChoices1" />
+          </AssociationSet>
+          <EntitySet Name="Papers" EntityType="MasterContext.Paper" />
+          <EntitySet Name="Grades" EntityType="MasterContext.Grade" />
+          <EntitySet Name="Subjects" EntityType="MasterContext.Subject" />
+          <EntitySet Name="Sections" EntityType="MasterContext.Section" />
+          <AssociationSet Name="PaperSection" Association="MasterContext.PaperSection">
+            <End Role="Paper" EntitySet="Papers" />
+            <End Role="Section" EntitySet="Sections" />
+          </AssociationSet>
+          <AssociationSet Name="SectionQuestion" Association="MasterContext.SectionQuestion">
+            <End Role="Section" EntitySet="Sections" />
+            <End Role="Question" EntitySet="QuestionInfoes" />
+          </AssociationSet>
+          <EntitySet Name="SectionTypes" EntityType="MasterContext.SectionType" />
+          <AssociationSet Name="SectionTypeSection" Association="MasterContext.SectionTypeSection">
+            <End Role="SectionType" EntitySet="SectionTypes" />
+            <End Role="Section" EntitySet="Sections" />
+          </AssociationSet>
+          <EntitySet Name="GradeSubjects" EntityType="MasterContext.GradeSubject" />
+          <AssociationSet Name="GradeGradeSubject" Association="MasterContext.GradeGradeSubject">
+            <End Role="Grade" EntitySet="Grades" />
+            <End Role="GradeSubject" EntitySet="GradeSubjects" />
+          </AssociationSet>
+          <AssociationSet Name="SubjectGradeSubject" Association="MasterContext.SubjectGradeSubject">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="GradeSubject" EntitySet="GradeSubjects" />
+          </AssociationSet>
+          <AssociationSet Name="GradeSubjectPaper" Association="MasterContext.GradeSubjectPaper">
+            <End Role="GradeSubject" EntitySet="GradeSubjects" />
+            <End Role="Paper" EntitySet="Papers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="QuestionInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="No" Type="String" Nullable="false" />
+          <Property Name="Question" Type="String" Nullable="false" />
+          <NavigationProperty Name="Section" Relationship="MasterContext.SectionQuestion" FromRole="Question" ToRole="Section" />
+          <NavigationProperty Name="Choices" Relationship="MasterContext.QuestionChoice" FromRole="Question" ToRole="Choice" />
+          <Property Name="Marks" Type="String" Nullable="false" />
+          <Property Name="SectionId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ChoiceInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Choice" Type="String" Nullable="false" />
+          <Property Name="IsAnswer" Type="String" Nullable="false" />
+          <Property Name="QuestionId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Question" Relationship="MasterContext.QuestionChoice" FromRole="Choice" ToRole="Question" />
+          <NavigationProperty Name="UserChoices" Relationship="MasterContext.ChoiceUserChoices" FromRole="Choice" ToRole="UserChoices" />
+        </EntityType>
+        <Association Name="QuestionChoice">
+          <End Type="MasterContext.QuestionInfo" Role="Question" Multiplicity="1" />
+          <End Type="MasterContext.ChoiceInfo" Role="Choice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Choice">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="UserChoices" Relationship="MasterContext.UserUserChoices" FromRole="User" ToRole="UserChoices" />
+          <Property Name="UserName" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" />
+          <Property Name="LastName" Type="String" Nullable="false" />
+          <Property Name="MobileNumber" Type="String" Nullable="false" />
+          <Property Name="NIC" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserChoice">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ChoiceId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="User" Relationship="MasterContext.UserUserChoices" FromRole="UserChoices" ToRole="User" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Choice" Relationship="MasterContext.ChoiceUserChoices" FromRole="UserChoices" ToRole="Choice" />
+          <Property Name="ChoiceId" Type="Int64" Nullable="false" />
+        </EntityType>
+        <Association Name="UserUserChoices">
+          <End Type="MasterContext.User" Role="User" Multiplicity="1" />
+          <End Type="MasterContext.UserChoice" Role="UserChoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserChoices">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ChoiceUserChoices">
+          <End Type="MasterContext.ChoiceInfo" Role="Choice" Multiplicity="1" />
+          <End Type="MasterContext.UserChoice" Role="UserChoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Choice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserChoices">
+              <PropertyRef Name="ChoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Paper">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="TimeMinutes" Type="String" Nullable="false" />
+          <Property Name="Marks" Type="String" Nullable="false" />
+          <NavigationProperty Name="GradeSubject" Relationship="MasterContext.GradeSubjectPaper" FromRole="Paper" ToRole="GradeSubject" />
+          <NavigationProperty Name="Sections" Relationship="MasterContext.PaperSection" FromRole="Paper" ToRole="Section" />
+          <Property Name="GradeSubjectId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <NavigationProperty Name="GradeSubjects" Relationship="MasterContext.GradeGradeSubject" FromRole="Grade" ToRole="GradeSubject" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <NavigationProperty Name="GradeSubjects" Relationship="MasterContext.SubjectGradeSubject" FromRole="Subject" ToRole="GradeSubject" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" />
+          <NavigationProperty Name="Paper" Relationship="MasterContext.PaperSection" FromRole="Section" ToRole="Paper" />
+          <Property Name="PaperId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SectionType" Relationship="MasterContext.SectionTypeSection" FromRole="Section" ToRole="SectionType" />
+          <NavigationProperty Name="Questions" Relationship="MasterContext.SectionQuestion" FromRole="Section" ToRole="Question" />
+          <Property Name="SectionTypeId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="PaperSection">
+          <End Type="MasterContext.Paper" Role="Paper" Multiplicity="1" />
+          <End Type="MasterContext.Section" Role="Section" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paper">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Section">
+              <PropertyRef Name="PaperId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SectionQuestion">
+          <End Type="MasterContext.Section" Role="Section" Multiplicity="1" />
+          <End Type="MasterContext.QuestionInfo" Role="Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="SectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SectionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" />
+          <NavigationProperty Name="Sections" Relationship="MasterContext.SectionTypeSection" FromRole="SectionType" ToRole="Section" />
+        </EntityType>
+        <Association Name="SectionTypeSection">
+          <End Type="MasterContext.SectionType" Role="SectionType" Multiplicity="1" />
+          <End Type="MasterContext.Section" Role="Section" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SectionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Section">
+              <PropertyRef Name="SectionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="GradeSubject">
+          <Key>
+            <PropertyRef Name="GradeId" />
+            <PropertyRef Name="SubjectId" />
+          </Key>
+          <NavigationProperty Name="Grade" Relationship="MasterContext.GradeGradeSubject" FromRole="GradeSubject" ToRole="Grade" />
+          <Property Name="Id" Type="String" Nullable="false" />
+          <Property Name="GradeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Subject" Relationship="MasterContext.SubjectGradeSubject" FromRole="GradeSubject" ToRole="Subject" />
+          <Property Name="SubjectId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Papers" Relationship="MasterContext.GradeSubjectPaper" FromRole="GradeSubject" ToRole="Paper" />
+        </EntityType>
+        <Association Name="GradeGradeSubject">
+          <End Type="MasterContext.Grade" Role="Grade" Multiplicity="1" />
+          <End Type="MasterContext.GradeSubject" Role="GradeSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GradeSubject">
+              <PropertyRef Name="GradeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SubjectGradeSubject">
+          <End Type="MasterContext.Subject" Role="Subject" Multiplicity="1" />
+          <End Type="MasterContext.GradeSubject" Role="GradeSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GradeSubject">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GradeSubjectPaper">
+          <End Type="MasterContext.GradeSubject" Role="GradeSubject" Multiplicity="1" />
+          <End Type="MasterContext.Paper" Role="Paper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GradeSubject">
+            </Principal>
+            <Dependent Role="Paper">
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="MasterContext" />
+        <Alias Key="Target" Value="MasterContext.Store" />
+        <EntityContainerMapping CdmEntityContainer="MasterContextContainer" StorageEntityContainer="MasterContextTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4b2417b1a8834b58afb1934a0880ad25" Name="Diagram1">
+        <EntityTypeShape EntityType="MasterContext.QuestionInfo" Width="1.5" PointX="8.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MasterContext.ChoiceInfo" Width="1.5" PointX="10.5" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MasterContext.User" Width="1.5" PointX="8.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MasterContext.UserChoice" Width="1.5" PointX="12.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MasterContext.Paper" Width="1.5" PointX="3.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MasterContext.Grade" Width="1.5" PointX="0.625" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MasterContext.Subject" Width="1.5" PointX="0.625" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MasterContext.Section" Width="1.5" PointX="6" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MasterContext.SectionType" Width="1.5" PointX="3.75" PointY="5.625" IsExpanded="true" />
+        <AssociationConnector Association="MasterContext.QuestionChoice" ManuallyRouted="false" />
+        <AssociationConnector Association="MasterContext.UserUserChoices" ManuallyRouted="false" />
+        <AssociationConnector Association="MasterContext.ChoiceUserChoices" ManuallyRouted="false" />
+        <AssociationConnector Association="MasterContext.PaperSection" ManuallyRouted="false" />
+        <AssociationConnector Association="MasterContext.SectionQuestion" ManuallyRouted="false" />
+        <AssociationConnector Association="MasterContext.SectionTypeSection" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MasterContext.GradeSubject" Width="1.5" PointX="1" PointY="1" />
+        <AssociationConnector Association="MasterContext.GradeGradeSubject" />
+        <AssociationConnector Association="MasterContext.SubjectGradeSubject" />
+        <AssociationConnector Association="MasterContext.GradeSubjectPaper" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
